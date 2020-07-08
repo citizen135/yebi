@@ -265,12 +265,8 @@ class Server(QWidget):
 	  comm_pub.publish(comm)
 	  comm_pub.publish(comm)
 
-##clear
-stamp=-1
-alert_robot=-1
-robot_num=[0]*3
+##clea
 wait_num=[0]*3
-count=0
 ##
 
 def ALERT(data):
@@ -278,7 +274,6 @@ def ALERT(data):
     global catch
     global wait_num
     global count
-    print("ds")
     try: 
 	    first_wait=wait_num.index(1)
 	    catch=data.catch
@@ -299,7 +294,6 @@ def ALERT(data):
 def robotstate(data):
 	global wait_num
 	robo=data.robot_num-1
-	print(robo)
 	wait_num[robo]=data.run
 	
     #wa

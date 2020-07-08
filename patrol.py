@@ -33,11 +33,6 @@ def command(data):
 	global flag
 	flag=data.data
 
-def changepath(data):
-	global path_num
-	path_num=data.data
-	print(path_num)
-
 
 def patrol_init():
 	global homedir
@@ -75,6 +70,17 @@ def patrol():
 		if way_num==way_last:
 			way_num=1
 			
+
+def changepath(data):
+	global path_num
+	global pause
+	global flag
+	global stat
+	path_num=data.data
+	stat=3
+	pause=True
+	flag='p'
+	
 def pubstate(event):
 	global robot_num
 	global path_num
@@ -127,20 +133,23 @@ if __name__=="__main__":
 					run=0
 					if way_num<=0:
 						way_num=1
-				flag="start"
+				flag=""
 			elif flag=='w':
 				patrol_init()
+				flag=""
 				pause=False
 			elif flag=='p':
 				pause=True
 				stat=3
 				patrol()
 				run=1
-			flag=""
+				flag=""
+			
 			if pause==True:
 				patrol()
 				run=1
 			
 		except rospy.ROSInterruptException:
+			patrol_init()
 			patrol_init()
 			pass
